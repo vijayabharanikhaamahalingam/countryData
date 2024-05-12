@@ -63,6 +63,7 @@ const x =fetch("https://restcountries.com/v3.1/all")
         const cardContent3 = document.createElement('div');
         cardContent3.classList.add('card-text')
         cardContent3.classList.add('text-center')
+        cardContent3.classList.add('latitude')
         cardContent3.id='latitude'
         cardContent3.textContent = 'Latitude: '+country.capitalInfo.latlng?.[0];
         cardBody.appendChild(cardContent3)
@@ -70,6 +71,7 @@ const x =fetch("https://restcountries.com/v3.1/all")
         const cardContent4 = document.createElement('div');
         cardContent4.classList.add('card-text')
         cardContent4.classList.add('text-center')
+        cardContent4.classList.add('longitude')
         cardContent4.id='longitude'
         cardContent4.textContent = 'Longitude: '+ country.capitalInfo.latlng?.[1];
         cardBody.appendChild(cardContent4)
@@ -121,9 +123,10 @@ const x =fetch("https://restcountries.com/v3.1/all")
     var button=document.getElementsByClassName('btn')
     Array.from(button).forEach(ele=>{
         ele.addEventListener('click',(event)=>{
+            const clickedButton = Array.from(button).indexOf(ele)
             event.stopPropagation();
-            const lat=document.getElementById('latitude').innerText.split('Latitude: ')[1]
-            const lon=document.getElementById('longitude').innerText.split('Longitude: ')[1]
+            const lat=Array.from(document.getElementsByClassName('latitude'))[clickedButton].innerText.split('Latitude: ')[1]
+            const lon=Array.from(document.getElementsByClassName('longitude'))[clickedButton].innerText.split('Longitude: ')[1]
             const API_key='6c5bf590fea6c9df3b5618e9fdc1b8c2'
         const URL="https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid="+API_key;
         fetch(URL)
